@@ -1,7 +1,13 @@
 (function(globals) {
   function d3Transform(chain) {
     var transforms = [];
-    if (chain !== undefined) { transforms.push(chain) }
+    if (typeof chain === 'function') {
+      transforms.push(chain);
+    } else if (typeof chain === 'object') {
+      for (var kind in chain) {
+        push(kind, chain[kind]);
+      }
+    }
 
     function push(kind, args) {
       var n = args.length;

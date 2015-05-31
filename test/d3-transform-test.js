@@ -70,5 +70,16 @@ vows.describe('d3-transform').addBatch({
         .scale(function(d) { return [d+1,4];});
       assert.equal(t2(10),"translate(10,1) rotate(2) scale(11,4)");
     }
+  },
+  'composing from object': {
+    'works': function () {
+      var transform = {
+        translate: [3, 5],
+        rotate: 2,
+        scale: [11, 4]
+      };
+      var t1 =d3Transform(transform);
+      assert.equal(t1(), "translate(3,5) rotate(2) scale(11,4)");
+    }
   }
 }).export(module);
